@@ -8,6 +8,16 @@ import { Footer } from "@/components/layout/Footer";
 export const metadata: Metadata = {
   title: "Opportunity Radar",
   description: "Discover startup opportunities, trends, and market signals.",
+  openGraph: {
+    title: "Opportunity Radar",
+    description: "Discover startup opportunities, trends, and market signals.",
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Opportunity Radar",
+    description: "Discover startup opportunities, trends, and market signals.",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

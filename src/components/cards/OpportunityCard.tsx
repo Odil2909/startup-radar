@@ -1,3 +1,5 @@
+"use client";
+
 import { Opportunity } from "@/types/opportunity";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -7,12 +9,20 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
+import { useFavorites } from "@/hooks/useFavorites";
+import { useMemo } from "react";
 
 interface OpportunityCardProps {
   opportunity: Opportunity;
 }
 
 export function OpportunityCard({ opportunity }: OpportunityCardProps) {
+  const { items, add, remove } = useFavorites();
+  const saved = useMemo(
+    () => items.some((i) => i.id === opportunity.id),
+    [items, opportunity.id],
+  );
+
   return (
     <Card className="group bg-surface/90 border-white/10 transition hover:-translate-y-1 hover:border-primary/40 hover:bg-surface">
       <CardHeader>
@@ -21,7 +31,17 @@ export function OpportunityCard({ opportunity }: OpportunityCardProps) {
             <CardTitle className="text-lg">{opportunity.title}</CardTitle>
             <CardDescription>{opportunity.category}</CardDescription>
           </div>
-          <Badge variant="secondary">{opportunity.score}</Badge>
+          <div className="flex items-center gap-2">
+            <Badge variant="secondary">{opportunity.score}</Badge>
+            <button
+              onClick={() =>
+                saved ? remove(opportunity.id) : add(opportunity)
+              }
+              className="rounded-full bg-white/5 px-3 py-1 text-xs"
+            >
+              {saved ? "Saved" : "Save"}
+            </button>
+          </div>
         </div>
       </CardHeader>
       <CardContent className="text-sm text-muted">

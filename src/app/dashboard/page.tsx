@@ -16,9 +16,18 @@ import { trends } from "@/data/trends";
 import { startups } from "@/data/startups";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { StatsCard } from "@/components/dashboard/StatsCard";
-import { GrowthChart } from "@/components/dashboard/GrowthChart";
-import { CategoryChart } from "@/components/dashboard/CategoryChart";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import { categories } from "@/lib/constants";
+const GrowthChart = dynamic(
+  () => import("@/components/dashboard/GrowthChart").then((m) => m.GrowthChart),
+  { ssr: false },
+);
+const CategoryChart = dynamic(
+  () =>
+    import("@/components/dashboard/CategoryChart").then((m) => m.CategoryChart),
+  { ssr: false },
+);
 
 const average = (values: number[]) =>
   Math.round(values.reduce((acc, value) => acc + value, 0) / values.length);
@@ -78,8 +87,16 @@ export default function DashboardPage() {
           </div>
 
           <div className="grid gap-6 lg:grid-cols-2">
-            <GrowthChart data={growthData} />
-            <CategoryChart data={chartData} />
+            <Suspense
+              fallback={<div className="h-72 rounded-3xl bg-background/80" />}
+            >
+              <GrowthChart data={growthData} />
+            </Suspense>
+            <Suspense
+              fallback={<div className="h-72 rounded-3xl bg-background/80" />}
+            >
+              <CategoryChart data={chartData} />
+            </Suspense>
           </div>
         </div>
 
@@ -91,12 +108,10 @@ export default function DashboardPage() {
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <BarChart
-                  data={startups
-                    .slice(0, 6)
-                    .map((startup) => ({
-                      name: startup.name,
-                      growth: startup.growth,
-                    }))}
+                  data={startups.slice(0, 6).map((startup) => ({
+                    name: startup.name,
+                    growth: startup.growth,
+                  }))}
                 >
                   <CartesianGrid stroke="#27272A" vertical={false} />
                   <XAxis
@@ -118,12 +133,10 @@ export default function DashboardPage() {
             <CardContent>
               <ResponsiveContainer width="100%" height={300}>
                 <LineChart
-                  data={trends
-                    .slice(0, 7)
-                    .map((trend, index) => ({
-                      name: trend.title.slice(0, 12),
-                      value: trend.trendScore + index * 2,
-                    }))}
+                  data={trends.slice(0, 7).map((trend, index) => ({
+                    name: trend.title.slice(0, 12),
+                    value: trend.trendScore + index * 2,
+                  }))}
                 >
                   <CartesianGrid stroke="#27272A" vertical={false} />
                   <XAxis

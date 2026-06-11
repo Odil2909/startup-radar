@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { opportunities } from "@/data/opportunities";
+import { useQuery } from "@tanstack/react-query";
 import { OpportunityCard } from "@/components/cards/OpportunityCard";
 import { Input } from "@/components/ui/input";
 import { Select, SelectItem } from "@/components/ui/select";
@@ -19,21 +19,32 @@ export default function OpportunitiesPage() {
   const [category, setCategory] = useState("All");
   const [sortKey, setSortKey] = useState("score");
 
+  const { data, isLoading } = useQuery<any>({
+    queryKey: ["opportunities"],
+    queryFn: async () => {
+      const res = await fetch("/api/opportunities");
+      const json = await res.json();
+      return json.opportunities || [];
+    },
+  });
+
+  const opportunities = useMemo(() => data || [], [data]);
+
   const filtered = useMemo(() => {
     return opportunities
       .filter(
-        (item) =>
+        (item: any) =>
           item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
           item.description.toLowerCase().includes(searchTerm.toLowerCase()),
       )
-      .filter((item) =>
+      .filter((item: any) =>
         category === "All" ? true : item.category === category,
       )
       .sort(
-        (a, b) =>
+        (a: any, b: any) =>
           b[sortKey as "score" | "growth"] - a[sortKey as "score" | "growth"],
       );
-  }, [searchTerm, category, sortKey]);
+  }, [searchTerm, category, sortKey, opportunities]);
 
   return (
     <main className="min-h-screen bg-background text-white">
@@ -91,14 +102,18 @@ export default function OpportunitiesPage() {
         </Card>
 
         <div className="mt-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-          {filtered.map((opportunity) => (
-            <Link
-              key={opportunity.id}
-              href={`/opportunities/${opportunity.id}`}
-            >
-              <OpportunityCard opportunity={opportunity} />
-            </Link>
-          ))}
+          {isLoading && (
+            <div className="text-muted">Loading opportunities…</div>
+          )}
+          {!isLoading &&
+            filtered.map((opportunity: any) => (
+              <Link
+                key={opportunity.id}
+                href={`/opportunities/${opportunity.id}`}
+              >
+                <OpportunityCard opportunity={opportunity} />
+              </Link>
+            ))}
         </div>
       </div>
     </main>

@@ -1,6 +1,17 @@
 {
-  "/page": "app/page.js",
+  "/api/analyze/route": "app/api/analyze/route.js",
+  "/api/opportunities/route": "app/api/opportunities/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/ai/page": "app/ai/page.js",
+  "/analyze/page": "app/analyze/page.js",
+  "/gaming/page": "app/gaming/page.js",
+  "/opportunities/page": "app/opportunities/page.js",
   "/dashboard/page": "app/dashboard/page.js",
+  "/favorites/page": "app/favorites/page.js",
   "/opportunities/[id]/page": "app/opportunities/[id]/page.js",
-  "/opportunities/page": "app/opportunities/page.js"
+  "/page": "app/page.js",
+  "/startups/page": "app/startups/page.js",
+  "/trending/page": "app/trending/page.js",
+  "/opportunity-of-the-day/page": "app/opportunity-of-the-day/page.js"
 }
