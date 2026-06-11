@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
-import type { ReactNode } from 'react';
-import './globals.css';
-import { Providers } from '@/components/layout/Providers';
-import { Navbar } from '@/components/layout/Navbar';
-import { Footer } from '@/components/layout/Footer';
+import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import "./globals.css";
+import { Providers } from "@/components/layout/Providers";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: 'Opportunity Radar',
-  description: 'Discover startup opportunities, trends, and market signals.',
+  title: "Opportunity Radar",
+  description: "Discover startup opportunities, trends, and market signals.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export function Hero() {
   return (
@@ -13,14 +13,22 @@ export function Hero() {
               Opportunity Radar for startup teams.
             </h1>
             <p className="max-w-2xl text-base leading-7 text-muted">
-              Explore fresh product ideas, growth signals, and startup momentum in a polished local MVP. No external APIs, no keys — just actionable insights.
+              Explore fresh product ideas, growth signals, and startup momentum
+              in a polished local MVP. No external APIs, no keys — just
+              actionable insights.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link href="/opportunities" className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500">
+            <Link
+              href="/opportunities"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:bg-indigo-500"
+            >
               Browse Opportunities
             </Link>
-            <Link href="/dashboard" className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-primary/50 hover:text-primary">
+            <Link
+              href="/dashboard"
+              className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-primary/50 hover:text-primary"
+            >
               View Dashboard
             </Link>
           </div>
@@ -29,15 +37,24 @@ export function Hero() {
           <div className="grid gap-4">
             <div className="rounded-3xl bg-white/5 p-5">
               <p className="font-medium text-white">Signal focus</p>
-              <p className="mt-2 text-sm">Monitor categories like AI, gaming, health, and productivity to capture high-conviction ideas.</p>
+              <p className="mt-2 text-sm">
+                Monitor categories like AI, gaming, health, and productivity to
+                capture high-conviction ideas.
+              </p>
             </div>
             <div className="rounded-3xl bg-white/5 p-5">
               <p className="font-medium text-white">Data-driven ranking</p>
-              <p className="mt-2 text-sm">Each opportunity is scored by growth potential, competition, and difficulty for a balanced view.</p>
+              <p className="mt-2 text-sm">
+                Each opportunity is scored by growth potential, competition, and
+                difficulty for a balanced view.
+              </p>
             </div>
             <div className="rounded-3xl bg-white/5 p-5">
               <p className="font-medium text-white">Built for founders</p>
-              <p className="mt-2 text-sm">A fast, responsive dashboard and discovery interface for ideation and validation.</p>
+              <p className="mt-2 text-sm">
+                A fast, responsive dashboard and discovery interface for
+                ideation and validation.
+              </p>
             </div>
           </div>
         </div>

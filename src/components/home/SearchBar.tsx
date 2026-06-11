@@ -1,4 +1,4 @@
-import { Search } from 'lucide-react';
+import { Search } from "lucide-react";
 
 export function SearchBar() {
   return (
@@ -9,12 +9,19 @@ export function SearchBar() {
             <Search className="h-5 w-5" />
           </div>
           <div>
-            <p className="text-sm uppercase tracking-[0.24em] text-muted">Search market signals</p>
-            <h2 className="text-2xl font-semibold text-white">Find opportunity ideas faster.</h2>
+            <p className="text-sm uppercase tracking-[0.24em] text-muted">
+              Search market signals
+            </p>
+            <h2 className="text-2xl font-semibold text-white">
+              Find opportunity ideas faster.
+            </h2>
           </div>
         </div>
         <div className="rounded-3xl border border-white/10 bg-background/80 p-4 text-sm text-muted">
-          <p>Search across opportunities, trends, and startups with category filters and growth ranking.</p>
+          <p>
+            Search across opportunities, trends, and startups with category
+            filters and growth ranking.
+          </p>
         </div>
       </div>
     </div>

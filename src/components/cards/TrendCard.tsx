@@ -1,6 +1,6 @@
-import { Trend } from '@/types/trend';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Trend } from "@/types/trend";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface TrendCardProps {
   trend: Trend;

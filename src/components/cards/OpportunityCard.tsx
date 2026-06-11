@@ -1,6 +1,12 @@
-import { Opportunity } from '@/types/opportunity';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Opportunity } from "@/types/opportunity";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 
 interface OpportunityCardProps {
   opportunity: Opportunity;

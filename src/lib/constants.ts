@@ -1,1 +1,8 @@
-export const categories = ['AI', 'Gaming', 'Productivity', 'Health', 'Fintech', 'Lifestyle'];
+export const categories = [
+  "AI",
+  "Gaming",
+  "Productivity",
+  "Health",
+  "Fintech",
+  "Lifestyle",
+];

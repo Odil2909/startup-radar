@@ -1,6 +1,6 @@
-import { Startup } from '@/types/startup';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Startup } from "@/types/startup";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface StartupCardProps {
   startup: Startup;
@@ -18,7 +18,9 @@ export function StartupCard({ startup }: StartupCardProps) {
           <Badge variant="secondary">{startup.funding}</Badge>
           <span>{startup.users} users</span>
         </div>
-        <p className="text-xs uppercase tracking-[0.24em] text-muted">Growth {startup.growth}%</p>
+        <p className="text-xs uppercase tracking-[0.24em] text-muted">
+          Growth {startup.growth}%
+        </p>
       </CardContent>
     </Card>
   );
