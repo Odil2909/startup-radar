@@ -10,6 +10,7 @@ import {
 import { Hero } from "@/components/home/Hero";
 import { SearchBar } from "@/components/home/SearchBar";
 import { FeaturedSection } from "@/components/home/FeaturedSection";
+import NewsList from "@/components/news/NewsList";
 import { opportunities } from "@/data/opportunities";
 import { startups } from "@/data/startups";
 import { trends } from "@/data/trends";
@@ -138,6 +139,20 @@ export default function HomePage() {
 
         <section className="mt-10">
           <FeaturedSection />
+        </section>
+
+        <section className="mt-10">
+          <Card className="bg-surface/90 border-slate-800 shadow-soft">
+            <CardHeader>
+              <CardTitle className="text-xl">Latest Hacker News</CardTitle>
+              <CardDescription>
+                Top Hacker News stories right now.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <NewsList limit={6} />
+            </CardContent>
+          </Card>
         </section>
 
         <section className="mt-10 grid gap-6 lg:grid-cols-3">

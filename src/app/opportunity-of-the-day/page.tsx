@@ -1,86 +1,92 @@
-import {
-  fetchTopStories,
-  mapStoryToOpportunity,
-} from "@/services/hackernews.service";
-import { scoreOpportunity } from "@/lib/opportunity-score";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { fetchTopNews } from "@/services/hackernews.service";
+import { analyzeStory } from "@/lib/opportunity-engine";
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-export const metadata = {
-  title: "Opportunity of the Day - Opportunity Radar",
-  description: "Daily highest scoring opportunity sourced from Hacker News.",
-};
-
-export default async function OpportunityOfTheDayPage() {
-  const stories = await fetchTopStories(40);
-  const opportunities = stories.map(mapStoryToOpportunity);
-  const scored = opportunities.map((op) => ({
-    op,
-    score: scoreOpportunity(op, opportunities),
+export default async function OpportunityOfTheDay() {
+  const stories = await fetchTopNews(30);
+  const analyses = stories.map((s) => ({
+    s,
+    a: analyzeStory({ ...s, descendants: (s as any).descendants ?? 0 }),
   }));
-  scored.sort((a, b) => b.score.score - a.score.score);
-  const top = scored[0];
+  analyses.sort((x, y) => y.a.opportunityScore - x.a.opportunityScore);
+  const top = analyses[0];
 
   if (!top) {
-    return (
-      <main className="min-h-screen bg-background text-white">
-        <div className="mx-auto max-w-4xl px-4 py-8">
-          No opportunity available
-        </div>
-      </main>
-    );
+    return <div className="p-8">No opportunity found.</div>;
   }
+
+  const { s, a } = top;
 
   return (
     <main className="min-h-screen bg-background text-white">
-      <div className="mx-auto max-w-4xl px-4 py-8">
-        <h1 className="text-4xl font-semibold">Opportunity of the Day</h1>
-        <p className="mt-2 text-sm text-muted">
-          Top scoring idea from recent Hacker News signals.
-        </p>
-
-        <Card className="mt-6 bg-surface/90">
+      <div className="mx-auto max-w-4xl px-4 py-12 lg:px-8">
+        <Card className="p-8">
           <CardHeader>
-            <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-2xl">{top.op.title}</CardTitle>
-                <p className="mt-2 text-sm text-muted">{top.op.category}</p>
+                <CardTitle className="text-3xl">
+                  Opportunity of the Day
+                </CardTitle>
+                <p className="mt-2 text-muted">
+                  Top scored opportunity from Hacker News
+                </p>
               </div>
-              <Badge variant="secondary">Score {top.score.score}</Badge>
+              <div className="text-right">
+                <Badge className="text-white">
+                  {a.grade} {a.opportunityScore}
+                </Badge>
+                <div className="mt-2 text-sm text-muted">{a.category}</div>
+              </div>
             </div>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4 md:grid-cols-3">
-              <div className="rounded-2xl bg-background/80 p-4">
-                <p className="text-sm uppercase text-muted">Growth Potential</p>
-                <p className="mt-2 text-xl font-semibold">{top.op.growth}%</p>
+            <h2 className="text-2xl font-semibold">{s.title}</h2>
+            <p className="mt-4 text-sm text-muted">
+              By {s.by ?? "unknown"} •{" "}
+              {s.time ? new Date(s.time * 1000).toLocaleString() : ""}
+            </p>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <div>
+                <h3 className="text-sm font-semibold">Why it matters</h3>
+                <p className="mt-2 text-sm text-muted">{a.reasoning}</p>
+                <h4 className="mt-4 text-sm font-semibold">Potential</h4>
+                <p className="text-sm">{a.potential}</p>
+                <h4 className="mt-4 text-sm font-semibold">Difficulty</h4>
+                <p className="text-sm">{a.difficulty}</p>
               </div>
-              <div className="rounded-2xl bg-background/80 p-4">
-                <p className="text-sm uppercase text-muted">Competition</p>
-                <p className="mt-2 text-xl font-semibold">
-                  {top.op.competition}/10
-                </p>
-              </div>
-              <div className="rounded-2xl bg-background/80 p-4">
-                <p className="text-sm uppercase text-muted">Difficulty</p>
-                <p className="mt-2 text-xl font-semibold">
-                  {top.op.difficulty}/10
-                </p>
+              <div>
+                <h3 className="text-sm font-semibold">Monetization</h3>
+                <ul className="mt-2 list-disc pl-5 text-sm">
+                  {a.monetization.map((m) => (
+                    <li key={m}>{m}</li>
+                  ))}
+                </ul>
+
+                <h3 className="mt-4 text-sm font-semibold">Badges</h3>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {a.badges.map((b) => (
+                    <span
+                      key={b}
+                      className="rounded-full bg-white/5 px-3 py-1 text-xs"
+                    >
+                      {b}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="mt-6 rounded-2xl bg-background/80 p-6">
-              <h3 className="text-lg font-semibold">Why this opportunity?</h3>
-              <p className="mt-3 text-sm text-muted">{top.score.reasoning}</p>
-            </div>
-
-            <div className="mt-6 rounded-2xl bg-background/80 p-6">
-              <h3 className="text-lg font-semibold">Monetization ideas</h3>
-              <ul className="mt-3 list-disc pl-5 text-sm text-muted">
-                <li>Subscription-based product for power users</li>
-                <li>API access for integrations and analytics</li>
-                <li>Marketplace for complementary services</li>
-              </ul>
+            <div className="mt-6">
+              <a
+                href={s.url ?? "#"}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white"
+              >
+                Read on Hacker News
+              </a>
             </div>
           </CardContent>
         </Card>

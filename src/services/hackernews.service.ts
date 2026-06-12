@@ -1,41 +1,42 @@
 import { Opportunity } from "@/types/opportunity";
 
-type HNItem = {
+// Types for HN API
+export interface HackerNewsItem {
   id: number;
-  by?: string;
-  descendants?: number;
-  score?: number;
-  time?: number;
   title?: string;
-  url?: string;
+  url?: string | null;
+  by?: string | null;
+  score?: number | null;
+  time?: number | null; // unix seconds
+  descendants?: number | null;
   type?: string;
+}
+
+export type NewsStory = Required<
+  Pick<HackerNewsItem, "id" | "title" | "url" | "by" | "score" | "time">
+> & {
+  descendants?: number | null;
 };
 
 const BASE = "https://hacker-news.firebaseio.com/v0";
+const TTL = 15 * 60 * 1000; // 15 minutes
 
-const cache = new Map<string, { ts: number; data: any }>();
-const TTL = 1000 * 60 * 3; // 3 minutes
+const fetchCache = new Map<string, { ts: number; data: any }>();
 
 async function cachedFetch<T>(key: string, url: string): Promise<T> {
   const now = Date.now();
-  const existing = cache.get(key);
+  const existing = fetchCache.get(key);
   if (existing && now - existing.ts < TTL) return existing.data as T;
 
   const res = await fetch(url);
   if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);
   const data = (await res.json()) as T;
-  cache.set(key, { ts: now, data });
+  fetchCache.set(key, { ts: now, data });
   return data;
 }
 
-export interface HackerNewsStory {
-  id: number;
-  title: string;
-  url?: string;
-  score: number;
-  author?: string;
-  time: number;
-  descendants?: number;
+export function clearNewsCache() {
+  fetchCache.clear();
 }
 
 export async function fetchTopStoryIds(limit = 50): Promise<number[]> {
@@ -51,21 +52,22 @@ export async function fetchTopStoryIds(limit = 50): Promise<number[]> {
   }
 }
 
-export async function fetchStory(id: number): Promise<HackerNewsStory | null> {
+export async function fetchStory(id: number): Promise<NewsStory | null> {
   try {
-    const item = await cachedFetch<HNItem>(
-      `item:${id}`,
-      `${BASE}/item/${id}.json`,
-    );
-    if (!item || item.type !== "story") return null;
+    const item =
+      (await cachedFetch<HackerNewsItem>(
+        `item:${id}`,
+        `${BASE}/item/${id}.json`,
+      )) || null;
+    if (!item || item.type !== "story" || !item.title) return null;
     return {
       id: item.id,
-      title: item.title || "Untitled",
-      url: item.url,
-      score: item.score || 0,
-      author: item.by,
-      time: item.time || Date.now() / 1000,
-      descendants: item.descendants || 0,
+      title: item.title,
+      url: item.url ?? null,
+      by: item.by ?? null,
+      score: item.score ?? 0,
+      time: item.time ?? Math.floor(Date.now() / 1000),
+      descendants: item.descendants ?? 0,
     };
   } catch (err) {
     console.error("fetchStory error", err);
@@ -73,14 +75,19 @@ export async function fetchStory(id: number): Promise<HackerNewsStory | null> {
   }
 }
 
-export async function fetchTopStories(limit = 50): Promise<HackerNewsStory[]> {
+export async function fetchTopStories(limit = 50): Promise<NewsStory[]> {
   const ids = await fetchTopStoryIds(limit);
   const promises = ids.map((id) => fetchStory(id));
   const items = await Promise.all(promises);
-  return items.filter((i): i is HackerNewsStory => i !== null);
+  return items.filter((i): i is NewsStory => i !== null);
 }
 
-export function mapStoryToOpportunity(story: HackerNewsStory): Opportunity {
+export async function fetchTopNews(limit = 20): Promise<NewsStory[]> {
+  const items = await fetchTopStories(Math.max(limit, 20));
+  return items.slice(0, limit);
+}
+
+export function mapStoryToOpportunity(story: NewsStory): Opportunity {
   const category = /ai|machine|ml|learning/i.test(story.title)
     ? "AI"
     : /game|gaming|player|stream/i.test(story.title)
