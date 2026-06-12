@@ -30,7 +30,7 @@ export default function TrendDashboard({
 }) {
   const t = useTrends();
   const [current, setCurrent] = useState<Opportunity[]>(initialItems || []);
-  const [mounted, setMounted] = useState(false);
+  const [mounted] = useState(false);
 
   useEffect(() => {
     let mounted = true;
