@@ -1,11 +1,7 @@
 {
   "version": 4,
   "routes": {
-    "/sitemap.xml": {
-      "initialHeaders": {
-        "content-type": "application/xml",
-        "x-next-cache-tags": "_N_T_/layout,_N_T_/sitemap.xml/layout,_N_T_/sitemap.xml/route,_N_T_/sitemap.xml"
-      },
+    "/gaming": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -18,8 +14,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/sitemap.xml",
-      "dataRoute": null,
+      "srcRoute": "/gaming",
+      "dataRoute": "/gaming.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -53,7 +49,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/early-opportunities": {
+    "/leaderboard": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -66,128 +62,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/early-opportunities",
-      "dataRoute": "/early-opportunities.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/gaming": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/gaming",
-      "dataRoute": "/gaming.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/ai": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/ai",
-      "dataRoute": "/ai.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/opportunities": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/opportunities",
-      "dataRoute": "/opportunities.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/favorites": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/favorites",
-      "dataRoute": "/favorites.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/dashboard": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/dashboard",
-      "dataRoute": "/dashboard.rsc",
+      "srcRoute": "/leaderboard",
+      "dataRoute": "/leaderboard.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -221,7 +97,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/leaderboard": {
+    "/early-opportunities": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -234,8 +110,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/leaderboard",
-      "dataRoute": "/leaderboard.rsc",
+      "srcRoute": "/early-opportunities",
+      "dataRoute": "/early-opportunities.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -245,7 +121,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/validate": {
+    "/ai": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -258,8 +134,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/validate",
-      "dataRoute": "/validate.rsc",
+      "srcRoute": "/ai",
+      "dataRoute": "/ai.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -269,7 +145,11 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/opportunity-of-the-day": {
+    "/sitemap.xml": {
+      "initialHeaders": {
+        "content-type": "application/xml",
+        "x-next-cache-tags": "_N_T_/layout,_N_T_/sitemap.xml/layout,_N_T_/sitemap.xml/route,_N_T_/sitemap.xml"
+      },
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -282,32 +162,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/opportunity-of-the-day",
-      "dataRoute": "/opportunity-of-the-day.rsc",
-      "allowHeader": [
-        "host",
-        "x-matched-path",
-        "x-prerender-revalidate",
-        "x-prerender-revalidate-if-generated",
-        "x-next-revalidated-tags",
-        "x-next-revalidate-tag-token"
-      ]
-    },
-    "/trending": {
-      "experimentalBypassFor": [
-        {
-          "type": "header",
-          "key": "Next-Action"
-        },
-        {
-          "type": "header",
-          "key": "content-type",
-          "value": "multipart/form-data;.*"
-        }
-      ],
-      "initialRevalidateSeconds": false,
-      "srcRoute": "/trending",
-      "dataRoute": "/trending.rsc",
+      "srcRoute": "/sitemap.xml",
+      "dataRoute": null,
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -341,6 +197,102 @@
         "x-next-revalidate-tag-token"
       ]
     },
+    "/opportunities": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/opportunities",
+      "dataRoute": "/opportunities.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/dashboard": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/dashboard",
+      "dataRoute": "/dashboard.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/validate": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/validate",
+      "dataRoute": "/validate.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/trending": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/trending",
+      "dataRoute": "/trending.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
     "/validation": {
       "experimentalBypassFor": [
         {
@@ -356,6 +308,30 @@
       "initialRevalidateSeconds": false,
       "srcRoute": "/validation",
       "dataRoute": "/validation.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
+    "/startups": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/startups",
+      "dataRoute": "/startups.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -389,7 +365,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/ideas": {
+    "/favorites": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -402,8 +378,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/ideas",
-      "dataRoute": "/ideas.rsc",
+      "srcRoute": "/favorites",
+      "dataRoute": "/favorites.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -437,6 +413,30 @@
         "x-next-revalidate-tag-token"
       ]
     },
+    "/ideas": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "Next-Action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/ideas",
+      "dataRoute": "/ideas.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
     "/trends": {
       "experimentalBypassFor": [
         {
@@ -461,7 +461,7 @@
         "x-next-revalidate-tag-token"
       ]
     },
-    "/startups": {
+    "/opportunity-of-the-day": {
       "experimentalBypassFor": [
         {
           "type": "header",
@@ -474,8 +474,8 @@
         }
       ],
       "initialRevalidateSeconds": false,
-      "srcRoute": "/startups",
-      "dataRoute": "/startups.rsc",
+      "srcRoute": "/opportunity-of-the-day",
+      "dataRoute": "/opportunity-of-the-day.rsc",
       "allowHeader": [
         "host",
         "x-matched-path",
@@ -489,8 +489,8 @@
   "dynamicRoutes": {},
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "03a315f8a77179801845387224a54f67",
-    "previewModeSigningKey": "8f33162f4a0e06e6e3d5115e23a8aa7f85f32f3bf40475243cfbf5b5e266342a",
-    "previewModeEncryptionKey": "ae93831f96c7e51a667fb80c02895f132625fdd5496440355239d260a00c227d"
+    "previewModeId": "7ab1bd64d335164190bc44cb3797df31",
+    "previewModeSigningKey": "8a3669c04558fb7189c8f4d80afe0d2a53b9e24a58d7a2033dfea48a32147078",
+    "previewModeEncryptionKey": "4738e531e192d970d45f6ae833008363bc8080fb0bf3eddb11fcceabf74dcaf5"
   }
 }
