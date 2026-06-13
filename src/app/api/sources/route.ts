@@ -2,7 +2,12 @@ import { NextResponse } from "next/server";
 import { fetchTopNews } from "@/services/hackernews.service";
 import { fetchGithubTrending } from "@/services/github.service";
 import { fetchRedditPosts } from "@/services/reddit.service";
-import { hnToOpportunity, githubToOpportunity, redditToOpportunity, dedupeAndMerge } from "@/lib/source-normalizer";
+import {
+  hnToOpportunity,
+  githubToOpportunity,
+  redditToOpportunity,
+  dedupeAndMerge,
+} from "@/lib/source-normalizer";
 
 const AGG_CACHE = new Map<string, { ts: number; data: any }>();
 const AGG_TTL = 15 * 60 * 1000;
@@ -31,6 +36,9 @@ export async function GET() {
     return NextResponse.json(merged, { status: 200 });
   } catch (err) {
     console.error("/api/sources error", err);
-    return NextResponse.json({ error: "Failed to fetch sources" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch sources" },
+      { status: 500 },
+    );
   }
 }

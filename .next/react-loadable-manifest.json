@@ -1,1 +1,15 @@
-{}
+{
+  "app/dashboard/page.tsx -> @/components/dashboard/CategoryChart": {
+    "id": 54381,
+    "files": [
+      "static/chunks/782.4087252f40fb9842.js",
+      "static/chunks/381.9f3c5500e3370fb4.js"
+    ]
+  },
+  "app/dashboard/page.tsx -> @/components/dashboard/GrowthChart": {
+    "id": 49802,
+    "files": [
+      "static/chunks/802.ea342feb2659aa36.js"
+    ]
+  }
+}

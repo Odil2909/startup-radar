@@ -30,7 +30,6 @@ export default function TrendDashboard({
 }) {
   const t = useTrends();
   const [current, setCurrent] = useState<Opportunity[]>(initialItems || []);
-  const [mounted] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -70,27 +69,17 @@ export default function TrendDashboard({
     t.refresh();
   }
 
-  const categorySeries = useMemo(
-    () => (mounted ? t.computeCategoryCountsOverTime() : []),
-    [t, mounted],
-  );
+  const categorySeries = useMemo(() => t.computeCategoryCountsOverTime(), [t]);
 
-  const { rising } = useMemo(
-    () =>
-      mounted ? t.computeRisingAndFalling(10) : { rising: [], falling: [] },
-    [t, mounted],
-  );
-
+  const { rising } = useMemo(() => t.computeRisingAndFalling(10), [t]);
   const topRisingIds = rising.map((r) => r.id).slice(0, 3);
   const scoreHistories = useMemo(
     () =>
-      mounted
-        ? topRisingIds.map((id) => ({
-            id,
-            history: t.getScoreHistoryForId(id),
-          }))
-        : [],
-    [t, topRisingIds, mounted],
+      topRisingIds.map((id) => ({
+        id,
+        history: t.getScoreHistoryForId(id),
+      })),
+    [t, topRisingIds],
   );
 
   return (

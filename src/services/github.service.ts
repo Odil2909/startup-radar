@@ -27,7 +27,10 @@ async function ghCachedFetch<T>(key: string, url: string): Promise<T> {
 
 export async function fetchGithubTrending(): Promise<GithubTrendingRepo[]> {
   try {
-    const data = await ghCachedFetch<GithubTrendingRepo[]>("gh-trending", GH_TREND_URL);
+    const data = await ghCachedFetch<GithubTrendingRepo[]>(
+      "gh-trending",
+      GH_TREND_URL,
+    );
     return data || [];
   } catch (err) {
     console.error("fetchGithubTrending error", err);

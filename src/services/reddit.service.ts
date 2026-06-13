@@ -24,14 +24,19 @@ async function redditCachedFetch<T>(key: string, url: string): Promise<T> {
   const existing = redditCache.get(key);
   if (existing && now - existing.ts < REDDIT_TTL) return existing.data as T;
 
-  const res = await fetch(url, { headers: { "User-Agent": "startup-radar/1.0" } });
+  const res = await fetch(url, {
+    headers: { "User-Agent": "startup-radar/1.0" },
+  });
   if (!res.ok) throw new Error(`Failed to fetch ${url}: ${res.status}`);
   const data = (await res.json()) as T;
   redditCache.set(key, { ts: now, data });
   return data;
 }
 
-export async function fetchRedditPosts(subreddits: string[] = DEFAULT_SUBREDDITS, perSub = 10): Promise<RedditPost[]> {
+export async function fetchRedditPosts(
+  subreddits: string[] = DEFAULT_SUBREDDITS,
+  perSub = 10,
+): Promise<RedditPost[]> {
   try {
     const promises = subreddits.map(async (sr) => {
       const url = `https://www.reddit.com/r/${sr}/hot.json?limit=${perSub}`;
