@@ -44,7 +44,11 @@ select {
 /* Mobile / touch optimizations */
 @media (max-width: 640px) {
   /* Ensure tappable targets meet accessibility minimums */
-  button, input, select, textarea, .inline-flex {
+  button,
+  input,
+  select,
+  textarea,
+  .inline-flex {
     min-height: 44px;
   }
 
