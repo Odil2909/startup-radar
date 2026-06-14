@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/components/layout/Providers";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata: Metadata = {
   title: "Opportunity Radar",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Navbar />
           <div className="min-h-[calc(100vh-8rem)]">{children}</div>
           <Footer />
+          <Analytics />
         </Providers>
       </body>
     </html>
