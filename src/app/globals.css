@@ -41,6 +41,19 @@ select {
   font: inherit;
 }
 
+/* Mobile / touch optimizations */
+@media (max-width: 640px) {
+  /* Ensure tappable targets meet accessibility minimums */
+  button, input, select, textarea, .inline-flex {
+    min-height: 44px;
+  }
+
+  /* Slightly larger base font on small screens for readability */
+  html {
+    font-size: 15px;
+  }
+}
+
 #root,
 #__next {
   min-height: 100vh;

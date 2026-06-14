@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { auth } from "@/auth";
+import SignInButton from "@/components/auth/SignInButton";
+import UserMenu from "@/components/auth/UserMenu";
+import { ChartBar } from "lucide-react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -11,7 +15,9 @@ const links = [
   { href: "/gaming", label: "Gaming" },
 ];
 
-export function Navbar() {
+export async function Navbar() {
+  const session = await auth();
+
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-background/95 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 lg:px-8">
@@ -35,13 +41,46 @@ export function Navbar() {
           ))}
         </nav>
 
-        <Link
-          href="/opportunities"
-          className="inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500"
-        >
-          Explore <ArrowRight className="h-4 w-4" />
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link
+            href="/opportunities"
+            className="hidden items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500 lg:inline-flex"
+          >
+            Explore <ArrowRight className="h-4 w-4" />
+          </Link>
+
+          <Link
+            href="/compare"
+            className="hidden items-center gap-2 rounded-full bg-white/5 px-3 py-2 text-sm font-semibold text-white transition hover:bg-white/6 lg:inline-flex"
+          >
+            Compare
+          </Link>
+
+          {/* mobile compare icon */}
+          <Link
+            href="/compare"
+            className="inline-flex items-center gap-2 rounded-full bg-white/5 p-2 text-sm text-white transition hover:bg-white/6 lg:hidden"
+            aria-label="Compare"
+          >
+            <ChartBar className="h-4 w-4" />
+          </Link>
+
+          <div>
+            {session?.user ? (
+              // server renders UserMenu with initial data
+              <UserMenu
+                name={session.user.name ?? null}
+                email={session.user.email ?? null}
+                image={session.user.image ?? null}
+              />
+            ) : (
+              <SignInButton />
+            )}
+          </div>
+        </div>
       </div>
     </header>
   );
 }
+
+export default Navbar;

@@ -15,25 +15,26 @@ export type SavedValidation = {
 
 const STORAGE_KEY = "sr_validation_history_v1";
 
-export function useValidationHistory() {
+export function useValidationHistory(namespace?: string) {
+  const storageKey = namespace ? `${STORAGE_KEY}_${namespace}` : STORAGE_KEY;
   const [items, setItems] = useState<SavedValidation[]>([]);
 
   useEffect(() => {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(storageKey);
       if (raw) setItems(JSON.parse(raw));
     } catch (e) {
       setItems([]);
     }
-  }, []);
+  }, [storageKey]);
 
   useEffect(() => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+      localStorage.setItem(storageKey, JSON.stringify(items));
     } catch (e) {
       // ignore
     }
-  }, [items]);
+  }, [items, storageKey]);
 
   function add(title: string) {
     const pre = preValidateIdea(title);

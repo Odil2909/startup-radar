@@ -7,6 +7,7 @@ import {
   ChartBar,
   Search,
 } from "lucide-react";
+import CompareMini from "@/components/compare/CompareMini";
 import { Hero } from "@/components/home/Hero";
 import { SearchBar } from "@/components/home/SearchBar";
 import { FeaturedSection } from "@/components/home/FeaturedSection";
@@ -62,7 +63,7 @@ export default function HomePage() {
                     <h3 className="mt-4 text-lg font-semibold text-white">
                       {opportunity.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-6 text-muted">
+                    <p className="mt-2 text-sm leading-6 text-muted max-h-14 overflow-hidden">
                       {opportunity.description}
                     </p>
                   </div>
@@ -91,7 +92,7 @@ export default function HomePage() {
                         <h3 className="text-lg font-semibold text-white">
                           {startup.name}
                         </h3>
-                        <p className="mt-2 text-sm leading-6 text-muted">
+                        <p className="mt-2 text-sm leading-6 text-muted max-h-14 overflow-hidden">
                           {startup.description}
                         </p>
                       </div>
@@ -127,13 +128,21 @@ export default function HomePage() {
                       </h3>
                       <Badge variant="secondary">{trend.trendScore}</Badge>
                     </div>
-                    <p className="mt-2 text-sm text-muted">
+                    <p className="mt-2 text-sm text-muted max-h-12 overflow-hidden">
                       Source: {trend.source}
                     </p>
                   </div>
                 ))}
               </CardContent>
             </Card>
+          </div>
+        </section>
+
+        <section className="mt-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="col-span-1 lg:col-start-2">
+              <CompareMini />
+            </div>
           </div>
         </section>
 
