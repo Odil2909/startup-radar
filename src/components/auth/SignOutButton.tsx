@@ -1,26 +1,15 @@
 "use client";
 
 import React from "react";
+import { signOut } from "@/auth";
 
-export function SignOutButton() {
-  async function handleSignOut() {
-    try {
-      // Post to the NextAuth signout endpoint to clear the session
-      await fetch("/api/auth/signout", { method: "POST" });
-    } catch (e) {
-      // fallback to navigation
-    }
-    window.location.href = "/";
-  }
-
+export default function SignOutButton() {
   return (
     <button
-      onClick={handleSignOut}
-      className="w-full rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-500"
+      onClick={() => signOut()}
+      className="rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:bg-indigo-500"
     >
-      Logout
+      Sign Out
     </button>
   );
 }
-
-export default SignOutButton;
