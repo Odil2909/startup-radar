@@ -1,5 +1,4 @@
 "use client";
-
 import {
   Bar,
   Line,
@@ -19,6 +18,8 @@ import { StatsCard } from "@/components/dashboard/StatsCard";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import { categories } from "@/lib/constants";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 const GrowthChart = dynamic(
   () => import("@/components/dashboard/GrowthChart").then((m) => m.GrowthChart),
   { ssr: false },
